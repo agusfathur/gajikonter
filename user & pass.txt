@@ -1,0 +1,10 @@
+Admin
+user	: goat
+pass	: 12345
+
+Karyawan
+1. 	user	: thor11
+	pass	: 12345
+
+2. 	user	: dodol
+	pass	: 12345
