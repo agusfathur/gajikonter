@@ -73,6 +73,12 @@ class DataKaryawan extends BaseController
 
     public function save()
     {   
+        if($this->request->getVar('username')){
+            $rules_uname = 'required|is_unique[data_karyawan.username]';
+        } else {
+            $rules_uname = 'required';
+        }
+
         if(!$this->validate([
             'nik' => [
                 'rules' => 'required|is_unique[data_karyawan.nik]',
@@ -88,9 +94,10 @@ class DataKaryawan extends BaseController
                 ]
             ],
             'username' => [
-                'rules'=>'required',
+                'rules'=> $rules_uname,
                 'errors'=> [
                     'required' => 'Username wajib diisi',
+                    'is_unique' => 'Username sudah ada'
                 ]
             ],
             'password' => [
@@ -121,7 +128,7 @@ class DataKaryawan extends BaseController
             'no_hp' => [
                 'rules'=>'required',
                 'errors'=> [
-                    'required' => 'No HP wajibdiisi',
+                    'required' => 'No HP wajib diisi',
                 ]
             ],
             'foto' => [
@@ -173,17 +180,25 @@ class DataKaryawan extends BaseController
         $dataUser = $this->gajiModel->where('id_karyawan', $id)->first();
         
         // cek password
-        if($dataUser['password'] == $this->request->getVar('password')){
+        if($this->request->getVar('password') && $this->request->getVar('password') != null){
             $rules_pass = 'required|min_length[5]';
+            $pass = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
         } else {
             $rules_pass = 'permit_empty';
+            $pass = $dataUser['password'];
         }
 
         // cek nik
         if($dataUser['nik'] == $this->request->getVar('nik')){
-            $rules_nik = 'required|is_unique[data_karyawan.nik]';
-        } else {
             $rules_nik = 'required';
+        } else {
+            $rules_nik = 'required|is_unique[data_karyawan.nik]';
+        }
+
+        if($dataUser['username'] == $this->request->getVar('username')){
+            $rules_uname = 'required';
+        } else {
+            $rules_uname = 'required|is_unique[data_karyawan.username]';
         }
 
         if(!$this->validate([
@@ -200,7 +215,7 @@ class DataKaryawan extends BaseController
                 ]
             ],
             'username' => [
-                'rules'=>'required',
+                'rules'=> $rules_uname,
                 'errors'=> [
                     'required' => 'Username wajib diisi',
                 ]
@@ -268,12 +283,6 @@ class DataKaryawan extends BaseController
             // hapus gambar
                 unlink("img/".$this->request->getVar('fotoLama'));
             }
-        }
-
-        if($this->request->getVar('password') && $this->request->getVar('password') != null){
-            $pass = password_hash($this->request->getVar('password'), PASSWORD_DEFAULT);
-        } else {
-            $pass = $dataUser['password'];
         }
         
         $this->gajiModel->save([

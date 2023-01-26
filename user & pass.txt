@@ -1,10 +1,7 @@
 Admin
-user	: goat
+user	: admin
 pass	: 12345
 
 Karyawan
-1. 	user	: thor11
-	pass	: 12345
-
-2. 	user	: dodol
+1. 	user	: karyawan
 	pass	: 12345

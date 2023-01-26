@@ -20,6 +20,7 @@
               <th class="text-center">No</th>
               <th class="text-center">NIK</th>
               <th class="text-center">Nama Karyawan</th>
+              <th class="text-center">Username</th>
               <th class="text-center">Alamat</th>
               <th class="text-center">Jenis Kelamin</th>
               <th class="text-center">Divisi</th>
@@ -35,6 +36,7 @@
               <td class="text-center"><?= $no++ ?></td>
               <td class="text-center"><?= $dk['nik']; ?></td>
               <td class="text-center"><?= ucwords($dk['nama_karyawan']);  ?></td>
+              <td class="text-center"><?= $dk['username'];  ?></td>
               <td class="text-center"><?= ucwords($dk['alamat']);  ?></td>
               <td class="text-center"><?= ucwords($dk['jenis_kelamin']);  ?></td>
               <td class="text-center"><?= ucwords($dk['divisi']);  ?></td>
