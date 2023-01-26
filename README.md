@@ -1,3 +1,9 @@
+## My First Project
+this is my first framework project using Codeiginiter.
+responsive on the web does not exist, only for desktop.
+I made it in 3 months but this is not original idea, i duplicated the idea
+the idea that I duplicated using codeigniter 3 then I remade it with codeigniter 4
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
